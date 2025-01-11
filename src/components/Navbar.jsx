@@ -7,7 +7,7 @@ export default function Navbar() {
       <a href="/">
         <img src={Logo} alt="logo" className={styles.logo} />
       </a>
-      <a href="/">
+      <a href="/profile">
         <User className={styles["profile-icon"]} />
       </a>
     </div>
