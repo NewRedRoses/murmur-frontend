@@ -8,3 +8,10 @@ body {
   max-width: 800px;
   margin: auto;
 }
+.container {
+  display: flex;
+  gap: 10px;
+}
+.container .right {
+  flex-grow: 2;
+}

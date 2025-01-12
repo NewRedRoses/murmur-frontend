@@ -1,0 +1,83 @@
+.chat-view {
+  display: flex;
+  height: 100%;
+  margin-top: 5%;
+  flex-direction: column;
+  border: 2.5px solid #bdc3c7;
+  border-radius: 5px;
+}
+.sender-details {
+  display: flex;
+  gap: 5px;
+  padding: 10px;
+  border-bottom: 2.5px solid #bdc3c7;
+}
+.sender-name {
+  color: #34495e;
+  font-weight: 600;
+}
+.sender-username {
+  color: #95a5a6;
+}
+.messages-container {
+  padding: 10px;
+  flex: 1;
+}
+.msg {
+  margin-top: 10px;
+  padding: 10px;
+}
+.msg {
+  background-color: grey;
+  color: white;
+  width: fit-content;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.msg-incoming .msg {
+  background-color: #8e44ad;
+  border-radius: 15px 15px 15px 0;
+  display: flex;
+}
+.msg-sending {
+  display: flex;
+  justify-content: flex-end;
+}
+.msg-sending .msg {
+  display: flex;
+  background-color: #3498db;
+  border-radius: 15px 15px 0 15px;
+}
+.message-composer {
+  display: flex;
+  gap: 2.5px;
+  background-color: #bdc3c7;
+  border: 2px solid #bdc3c7;
+  border-top: 3px solid #bdc3c7;
+}
+.message-composer textarea {
+  width: 100%;
+  font-family: "Rubik";
+  background-color: #ecf0f1;
+  color: #34495e;
+  padding: 5px;
+  font-weight: 500;
+  max-height: 80px;
+  resize: none;
+  border: 0;
+  border-radius: 5px;
+}
+.submit-btn {
+  padding: 10px;
+  border: 0;
+  border-radius: 5px;
+  background-color: #3498db;
+  position: relative;
+}
+.submit-btn:hover {
+  cursor: pointer;
+}
+.submit-btn:active {
+  top: 1px;
+}
