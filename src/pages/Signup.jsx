@@ -1,10 +1,15 @@
 import styles from "../styles/login.module.css";
 export default function Signup() {
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
   return (
     <>
       <div className={styles["signup-container"]}>
         <h1 className={styles.text}>Sign Up</h1>
-        <form action="/test" method="post" className={styles["signup-form"]}>
+        <form
+          action={apiUrl + "api/auth/signup"}
+          method="post"
+          className={styles["signup-form"]}
+        >
           <div className={styles.input}>
             <label htmlFor="fullname" className={styles.text}>
               Full Name
