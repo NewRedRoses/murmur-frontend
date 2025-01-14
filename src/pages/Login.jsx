@@ -1,11 +1,16 @@
 import Logo from "../../public/Logo.svg";
 import styles from "../styles/login.module.css";
 export default function Login() {
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
   return (
     <div className={styles["login-container"]}>
       <img src={Logo} alt="logo" className={styles.logo} />
       <h1 className={styles.text}>Login</h1>
-      <form action="/test" method="post" className={styles["login-form"]}>
+      <form
+        action={apiUrl + "api/auth/login"}
+        method="post"
+        className={styles["login-form"]}
+      >
         <div className={styles.input}>
           <label htmlFor="username" className={styles.text}>
             Username
