@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate, redirect } from "react-router-dom";
 export default function Home() {
   const apiUrl = import.meta.env.VITE_APP_API_URL;
+  const url = `${apiUrl}api/messages`;
   const [messages, setMessages] = useState([]);
 
   const token = localStorage.getItem("token");
@@ -14,18 +15,24 @@ export default function Home() {
 
   useEffect(() => {
     axios
-      .get(`${apiUrl}api/messages`, {
+      .get(url, {
         headers: { Authorization: `Bearer ${token}` },
       })
-
       .then((response) => {
         if (response.status == 200) {
           setMessages(response.data);
+        }
+      })
+      .catch((error) => {
+        if (error.status == 403) {
+          console.log("Forbidden! You ain't got the right");
+          localStorage.removeItem("token");
+          navigate("login");
         } else {
-          localStorage.clear();
+          console.log(error);
         }
       });
-  }, []);
+  }, [url]);
 
   return (
     <div className="content">
