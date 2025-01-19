@@ -5,7 +5,7 @@ import styles from "../styles/login.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login({ onLogIn }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -27,11 +27,10 @@ export default function Login() {
           },
         },
       );
-      console.log(response);
 
       if (response.status === 200) {
-        console.log("Login success");
         localStorage.setItem("token", response.data.token);
+        onLogIn();
         navigate("/");
       } else {
         alert("Login Failure");
