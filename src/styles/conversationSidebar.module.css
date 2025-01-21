@@ -56,3 +56,6 @@ ol.conversations {
   color: #34495e;
   /*font-weight: 350;*/
 }
+ol a {
+  text-decoration: none;
+}
