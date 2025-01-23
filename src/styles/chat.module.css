@@ -6,6 +6,18 @@
   border: 2.5px solid #bdc3c7;
   border-radius: 5px;
 }
+.chat-view.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #bdc3c7;
+}
+.chat-view .chat-view-msg {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #34495e;
+}
 .sender-details {
   display: flex;
   gap: 5px;

@@ -17,7 +17,7 @@ export default function ConversationSidebar({ conversations }) {
       <ol className={styles.conversations}>
         {conversations.map(({ id, name, username }) => {
           return (
-            <a href={`chat/${username}`} key={id}>
+            <a href={`/chat/${username}`} key={id}>
               <MessageCard key={id} id={id} name={name} username={username} />
             </a>
           );
