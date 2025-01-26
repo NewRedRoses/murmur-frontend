@@ -7,7 +7,13 @@ import Message from "../components/Message.jsx";
 
 export default function Chat({ username }) {
   const [messages, setMessages] = useState([]);
+  const [messageToSend, setMessageToSend] = useState("");
   const [loggedInUserId, setLoggedInUserId] = useState();
+  const [senderUserData, setSenderUserData] = useState({
+    id: undefined,
+    username: "",
+    name: "",
+  });
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
@@ -20,8 +26,9 @@ export default function Chat({ username }) {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        const { loggedInUserId, messages } = response.data;
+        const { senderUserData, loggedInUserId, messages } = response.data;
         if (response.status == 200) {
+          setSenderUserData(senderUserData);
           setMessages(messages);
           setLoggedInUserId(loggedInUserId);
         }
@@ -30,11 +37,39 @@ export default function Chat({ username }) {
         if (error.status == 403) {
           console.log("Forbidden! You ain't got the right");
           localStorage.removeItem("token");
-          navigate("login");
+          navigate("/login");
         }
         console.log(error.status);
       });
   }, [url]);
+
+  function handleSubmitMsg() {
+    axios
+      .post(
+        url,
+        {
+          msgReceiverId: senderUserData.id,
+          msgSenderId: loggedInUserId,
+          message: messageToSend,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        },
+      )
+      .then((response) => {
+        if (response.status == 200) {
+          setMessageToSend("");
+          navigate(0);
+        }
+      })
+      .catch((err) => {
+        console.log("Error when trying to send message: ", err);
+        alert("ERROR: Unable to send message");
+      });
+  }
 
   return username ? (
     <div className={styles["chat-view"]}>
@@ -47,8 +82,10 @@ export default function Chat({ username }) {
           />
         </div>
         <div className={styles["sender-details-mid"]}>
-          <div className={styles["sender-name"]}>Test</div>
-          <div className={styles["sender-username"]}>@test</div>
+          <div className={styles["sender-name"]}>{senderUserData.name}</div>
+          <div
+            className={styles["sender-username"]}
+          >{`@${senderUserData.username}`}</div>
         </div>
       </div>
       <ul className={styles["messages-container"]}>
@@ -62,8 +99,17 @@ export default function Chat({ username }) {
         ))}
       </ul>
       <div className={styles["message-composer"]}>
-        <textarea name="messageToSend" id="messageToSend" />
-        <button type="submit" className={styles["submit-btn"]}>
+        <textarea
+          name="messageToSend"
+          id="messageToSend"
+          value={messageToSend}
+          onChange={(e) => setMessageToSend(e.target.value)}
+        />
+        <button
+          type="submit"
+          className={styles["submit-btn"]}
+          onClick={handleSubmitMsg}
+        >
           <Send color="white" />
         </button>
       </div>
