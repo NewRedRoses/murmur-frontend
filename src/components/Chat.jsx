@@ -75,17 +75,22 @@ export default function Chat({ username }) {
     <div className={styles["chat-view"]}>
       <div className={styles["sender-details"]}>
         <div className={styles["sender-details-left"]}>
-          <UserRound
-            className={styles["msg-card-pfp"]}
-            size="35"
-            color="#34495E"
-          />
+          <div className={styles["sender-details-pfp"]}>
+            <UserRound
+              className={styles["msg-card-pfp"]}
+              size="35"
+              color="#34495E"
+            />
+          </div>
+          <div className={styles["sender-details-mid"]}>
+            <div className={styles["sender-name"]}>{senderUserData.name}</div>
+            <div
+              className={styles["sender-username"]}
+            >{`@${senderUserData.username}`}</div>
+          </div>
         </div>
-        <div className={styles["sender-details-mid"]}>
-          <div className={styles["sender-name"]}>{senderUserData.name}</div>
-          <div
-            className={styles["sender-username"]}
-          >{`@${senderUserData.username}`}</div>
+        <div className={styles["sender-details-right"]}>
+          <div className={styles["status-msg"]}>{senderUserData.status}</div>
         </div>
       </div>
       <ul className={styles["messages-container"]}>

@@ -20,9 +20,29 @@
 }
 .sender-details {
   display: flex;
+  justify-content: space-between;
   gap: 5px;
   padding: 10px;
   border-bottom: 2.5px solid #bdc3c7;
+}
+.sender-details-left {
+  display: flex;
+  gap: 5px;
+}
+.sender-details-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+}
+.status-msg {
+  color: #95a5a6;
+  text-align: right;
+  display: inline-block;
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .sender-name {
   color: #34495e;
