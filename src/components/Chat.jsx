@@ -43,32 +43,35 @@ export default function Chat({ username }) {
       });
   }, [url]);
 
+  // TODO: Disable ability to send message if message is empty
   function handleSubmitMsg() {
-    axios
-      .post(
-        url,
-        {
-          msgReceiverId: senderUserData.id,
-          msgSenderId: loggedInUserId,
-          message: messageToSend,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/x-www-form-urlencoded",
+    if (messageToSend != "") {
+      axios
+        .post(
+          url,
+          {
+            msgReceiverId: senderUserData.id,
+            msgSenderId: loggedInUserId,
+            message: messageToSend,
           },
-        },
-      )
-      .then((response) => {
-        if (response.status == 200) {
-          setMessageToSend("");
-          navigate(0);
-        }
-      })
-      .catch((err) => {
-        console.log("Error when trying to send message: ", err);
-        alert("ERROR: Unable to send message");
-      });
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          },
+        )
+        .then((response) => {
+          if (response.status == 200) {
+            setMessageToSend("");
+            navigate(0);
+          }
+        })
+        .catch((err) => {
+          console.log("Error when trying to send message: ", err);
+          alert("ERROR: Unable to send message");
+        });
+    }
   }
 
   return username ? (
