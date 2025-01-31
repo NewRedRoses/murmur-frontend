@@ -4,40 +4,55 @@ import styles from "../styles/login.module.css";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Notification from "../components/Notification";
 
 export default function Login({ onLogIn }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const [notification, setNotification] = useState({
+    message: undefined,
+    type: undefined,
+  });
   const apiUrl = import.meta.env.VITE_APP_API_URL;
   const navigate = useNavigate();
 
   async function handleLogin(e) {
     try {
       e.preventDefault();
-      const response = await axios.post(
-        `${apiUrl}api/auth/login`,
-        {
-          username,
-          password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
+      await axios
+        .post(
+          `${apiUrl}api/auth/login`,
+          {
+            username,
+            password,
           },
-        },
-      );
-
-      if (response.status === 200) {
-        localStorage.setItem("token", response.data.token);
-        onLogIn();
-        navigate("/");
-      } else {
-        alert("Login Failure");
-      }
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          },
+        )
+        .then((response) => {
+          if (response.status === 200) {
+            localStorage.setItem("token", response.data.token);
+            onLogIn();
+            navigate("/");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          setNotification({
+            type: "error",
+            message: err.response.data.message,
+          });
+        });
     } catch (err) {
       console.log(err);
-      alert("Unable to login");
+      setNotification({
+        type: "error",
+        message: err.response.data.message,
+      });
     }
   }
 
@@ -45,6 +60,8 @@ export default function Login({ onLogIn }) {
     <div className={styles["login-container"]}>
       <img src={Logo} alt="logo" className={styles.logo} />
       <h1 className={styles.text}>Login</h1>
+
+      <Notification type={notification.type} message={notification.message} />
 
       <form className={styles["login-form"]}>
         <div className={styles.input}>

@@ -4,6 +4,7 @@ import Signup from "./pages/Signup.jsx";
 import Profile from "./pages/Profile.jsx";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -12,11 +13,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem("logged_in", JSON.stringify(isLoggedIn));
   }, [isLoggedIn]);
-
   const logIn = () => setIsLoggedIn(true);
 
   const logOut = () => {
-    // WIP
+    localStorage.removeItem("token");
   };
 
   return (
@@ -24,17 +24,27 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={isLoggedIn ? <Home /> : <Navigate to="/login" />}
+          element={
+            isLoggedIn ? (
+              <Home setIsLoggedIn={setIsLoggedIn} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
         <Route path="/login" element={<Login onLogIn={logIn} />} />
-        <Route
-          path="/signup"
-          element={isLoggedIn ? <Signup /> : <Navigate to="/login" />}
-        />
+        <Route path="/signup" element={<Signup />} />
         <Route
           path="/profile"
-          element={isLoggedIn ? <Profile /> : <Navigate to="/login" />}
+          element={
+            isLoggedIn ? (
+              <Profile setIsLoggedIn={setIsLoggedIn} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
+        <Route path="/chat/:username" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );

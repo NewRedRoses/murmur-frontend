@@ -49,3 +49,8 @@ input:-webkit-autofill {
   max-width: 300px;
   margin: auto;
 }
+input,
+select,
+textarea {
+  color: #34495e;
+}

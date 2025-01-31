@@ -2,7 +2,21 @@
   max-width: 300px;
 }
 .header {
+  font-size: 1.7rem;
+  display: flex;
+  gap: 10px;
+  align-items: center;
   color: #34495e;
+}
+.new-conversation-btn {
+  background-color: #3498db;
+  color: white;
+  border: 0;
+  padding: 5px;
+  border-radius: 5px;
+}
+.new-conversation-btn:hover {
+  cursor: pointer;
 }
 .searchbar-container {
   display: flex;
