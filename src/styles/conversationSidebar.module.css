@@ -68,8 +68,18 @@ ol.conversations {
 }
 .msg-card-preview-text {
   color: #34495e;
-  /*font-weight: 350;*/
 }
 ol a {
   text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .conversations {
+    display: flex;
+    flex-direction: row;
+    overflow-y: auto;
+  }
+  .conversation-card {
+    width: 200px;
+  }
 }

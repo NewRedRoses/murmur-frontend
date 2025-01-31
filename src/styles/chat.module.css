@@ -116,3 +116,9 @@
 .submit-btn:active {
   top: 1px;
 }
+@media (max-width: 600px) {
+  .chat-view.empty {
+    width: 300px;
+    height: 300px;
+  }
+}

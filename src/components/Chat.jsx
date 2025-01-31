@@ -43,7 +43,6 @@ export default function Chat({ username }) {
       });
   }, [url]);
 
-  // TODO: Disable ability to send message if message is empty
   function handleSubmitMsg() {
     if (messageToSend != "") {
       axios
