@@ -10,6 +10,8 @@ export default function ConversationSidebar({ conversations }) {
   const [modalShow, setModalShow] = useState(false);
   const [usernameToSearch, setUsernameToSearch] = useState("");
   const [isUsernameFound, setIsUsernameFound] = useState(false);
+  const [filteringTerm, setFilteringTerm] = useState("");
+  const [filteredConversations, setFilteredConversations] = useState([]);
 
   const token = localStorage.getItem("token");
   const apiUrl = import.meta.env.VITE_APP_API_URL;
@@ -43,6 +45,31 @@ export default function ConversationSidebar({ conversations }) {
         }
       });
   }
+
+  function renderAllConversations(conversations) {
+    return conversations.map(({ id, name, username }) => {
+      return (
+        <a href={`/chat/${username}`} key={id}>
+          <MessageCard key={id} id={id} name={name} username={username} />
+        </a>
+      );
+    });
+  }
+  function handleConversationSearch(e) {
+    setFilteringTerm(e.target.value);
+
+    // filter & return conversations matching name or username
+    const newConvoList = conversations.filter((conversation) => {
+      const { name, username } = conversation;
+      if (
+        name.toLowerCase().includes(filteringTerm) ||
+        username.toLowerCase().includes(filteringTerm)
+      ) {
+        return true;
+      }
+    });
+    setFilteredConversations(newConvoList);
+  }
   return (
     <div className={styles["conversations-sidebar"]}>
       <h1 className={styles.header}>
@@ -65,18 +92,16 @@ export default function ConversationSidebar({ conversations }) {
         <Search className={styles["search-icon"]} size="25" color="#34495e" />
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Search user conversations"
           className={styles["searchbar-inputbox"]}
+          value={filteringTerm}
+          onChange={handleConversationSearch}
         />
       </div>
       <ol className={styles.conversations}>
-        {conversations.map(({ id, name, username }) => {
-          return (
-            <a href={`/chat/${username}`} key={id}>
-              <MessageCard key={id} id={id} name={name} username={username} />
-            </a>
-          );
-        })}
+        {renderAllConversations(
+          filteringTerm != "" ? filteredConversations : conversations,
+        )}
       </ol>
     </div>
   );
