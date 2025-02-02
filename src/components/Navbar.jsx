@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const token = localStorage.getItem("token");
-  const apiUrl = "http://api.murmur.chat/";
+  const apiUrl = "https://api.murmur.chat/";
   const url = `${apiUrl}api/auth/logout`;
   const navigate = useNavigate();
 

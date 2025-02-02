@@ -14,7 +14,7 @@ export default function Login({ onLogIn }) {
     message: undefined,
     type: undefined,
   });
-  const apiUrl = "http://api.murmur.chat/";
+  const apiUrl = "https://api.murmur.chat/";
   const navigate = useNavigate();
 
   async function handleLogin(e) {

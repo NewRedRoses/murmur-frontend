@@ -6,7 +6,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function Home({ setIsLoggedIn }) {
-  const apiUrl = "http://api.murmur.chat/";
+  const apiUrl = "https://api.murmur.chat/";
   const url = `${apiUrl}api/messages`;
   const [messages, setMessages] = useState([]);
   const navigate = useNavigate();

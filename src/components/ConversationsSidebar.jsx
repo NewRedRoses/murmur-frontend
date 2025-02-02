@@ -19,7 +19,7 @@ export default function ConversationSidebar({ conversations }) {
   });
 
   const token = localStorage.getItem("token");
-  const apiUrl = "http://api.murmur.chat/";
+  const apiUrl = "https://api.murmur.chat/";
   const url = `${apiUrl}api/profile/${usernameToSearch}`;
 
   const navigate = useNavigate();
