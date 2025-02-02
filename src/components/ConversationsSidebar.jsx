@@ -4,7 +4,7 @@ import MessageCard from "./MessageCard";
 import { Search, MessageSquarePlus } from "lucide-react";
 import Modal from "../components/Modal.jsx";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Notification from "./Notification.jsx";
 
 export default function ConversationSidebar({ conversations }) {
@@ -33,8 +33,6 @@ export default function ConversationSidebar({ conversations }) {
           setModalShow(!modalShow);
 
           navigate(`/chat/${usernameToSearch}`);
-        } else {
-          console.log(response);
         }
       })
       .catch((err) => {
@@ -49,9 +47,9 @@ export default function ConversationSidebar({ conversations }) {
   function renderAllConversations(conversations) {
     return conversations.map(({ id, name, username }) => {
       return (
-        <a href={`/chat/${username}`} key={id}>
+        <Link to={`/chat/${username}`} key={id}>
           <MessageCard key={id} id={id} name={name} username={username} />
-        </a>
+        </Link>
       );
     });
   }

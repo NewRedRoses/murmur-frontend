@@ -1,7 +1,7 @@
 import axios from "axios";
 import styles from "../styles/login.module.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Notification from "../components/Notification";
 
 export default function Signup() {
@@ -30,7 +30,6 @@ export default function Signup() {
       })
       .then((response) => {
         if (response.status == 200) {
-          console.log("response on profile submit: ", response.status);
           setNotification({
             type: "normal",
             message: "Account created successfully.",
@@ -104,7 +103,7 @@ export default function Signup() {
         </div>
         <div className={styles["login-link"]}>
           <span className={styles.text}>Already have an account?</span>
-          <a href="/login">Log In!</a>
+          <Link to="/login">Log In!</Link>
         </div>
       </div>
     </>

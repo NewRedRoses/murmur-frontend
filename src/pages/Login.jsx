@@ -3,7 +3,7 @@ import Logo from "../../public/Logo.svg";
 import styles from "../styles/login.module.css";
 
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Notification from "../components/Notification";
 
 export default function Login({ onLogIn }) {
@@ -99,7 +99,7 @@ export default function Login({ onLogIn }) {
       </form>
       <div className={styles["signup-link"]}>
         <span className={styles.text}>New?</span>
-        <a href="/signup">Sign Up!</a>
+        <Link to="/signup">Sign up! </Link>
       </div>
     </div>
   );

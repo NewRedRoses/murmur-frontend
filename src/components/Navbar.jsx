@@ -2,7 +2,7 @@ import axios from "axios";
 import Logo from "../../public/Logo.svg";
 import styles from "../styles/navbar.module.css";
 import { User, LogOut } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const token = localStorage.getItem("token");
@@ -16,13 +16,13 @@ export default function Navbar() {
   }
   return (
     <div className={styles.navbar}>
-      <a href="/">
+      <Link to="/">
         <img src={Logo} alt="logo" className={styles.logo} />
-      </a>
+      </Link>
       <div className={styles["right"]}>
-        <a href="/profile">
+        <Link to="/profile">
           <User className={styles["profile-icon"]} />
-        </a>
+        </Link>
         <button onClick={handleLogout} className={styles["logout-btn"]}>
           <LogOut className={styles["logout-icon"]} />
         </button>
