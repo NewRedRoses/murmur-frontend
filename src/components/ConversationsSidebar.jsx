@@ -28,7 +28,6 @@ export default function ConversationSidebar({ conversations }) {
     axios
       .get(url, { headers: { Authorization: `Bearer ${token}` } })
       .then((response) => {
-        // TODO: check if search user is the same as user logged in
         if (response.status == 200) {
           setIsUsernameFound(true);
           setModalShow(!modalShow);

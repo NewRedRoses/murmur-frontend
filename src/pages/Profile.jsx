@@ -4,7 +4,6 @@ import styles from "../styles/profile.module.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Notification from "../components/Notification";
-axios;
 
 export default function Profile() {
   const [profileData, setProfileData] = useState({
@@ -70,7 +69,6 @@ export default function Profile() {
       <Navbar />
       <div className={styles["profile-content"]}>
         <h1 className={styles.header}>Profile</h1>
-        <Notification />
         <Notification type={notification.type} message={notification.message} />
         <form action="" method="POST" className={styles["profile-form"]}>
           <label htmlFor="fullname">Full Name</label>

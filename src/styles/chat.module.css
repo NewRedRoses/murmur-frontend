@@ -9,6 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
   gap: 10px;
   background-color: #bdc3c7;
 }
@@ -51,8 +52,8 @@
   color: #95a5a6;
 }
 .messages-container {
-  min-height: 200px;
-  max-height: 400px;
+  min-height: 400px;
+  height: 400px;
   overflow: auto;
   padding-right: 10px;
   padding-left: 10px;
