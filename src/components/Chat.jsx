@@ -11,8 +11,8 @@ export default function Chat({ username }) {
   const [loggedInUserId, setLoggedInUserId] = useState();
   const [senderUserData, setSenderUserData] = useState({
     id: undefined,
-    username: "",
-    name: "",
+    username: undefined,
+    name: undefined,
   });
   const navigate = useNavigate();
 
@@ -21,26 +21,28 @@ export default function Chat({ username }) {
   const url = `${apiUrl}api/messages/chat/${username}`;
 
   useEffect(() => {
-    axios
-      .get(url, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        const { senderUserData, loggedInUserId, messages } = response.data;
-        if (response.status == 200) {
-          setSenderUserData(senderUserData);
-          setMessages(messages);
-          setLoggedInUserId(loggedInUserId);
-        }
-      })
-      .catch((error) => {
-        if (error.status == 403) {
-          console.log("Forbidden! You ain't got the right");
-          localStorage.removeItem("token");
-          navigate("/login");
-        }
-        console.log(error.status);
-      });
+    if (username != undefined) {
+      axios
+        .get(url, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => {
+          const { senderUserData, loggedInUserId, messages } = response.data;
+          if (response.status == 200) {
+            setSenderUserData(senderUserData);
+            setMessages(messages);
+            setLoggedInUserId(loggedInUserId);
+          }
+        })
+        .catch((error) => {
+          if (error.status == 403) {
+            console.log("Forbidden! You ain't got the right");
+            localStorage.removeItem("token");
+            navigate("/login");
+          }
+          console.log(error.status);
+        });
+    }
   }, [url]);
 
   function handleSubmitMsg() {
@@ -85,14 +87,20 @@ export default function Chat({ username }) {
             />
           </div>
           <div className={styles["sender-details-mid"]}>
-            <div className={styles["sender-name"]}>{senderUserData.name}</div>
-            <div
-              className={styles["sender-username"]}
-            >{`@${senderUserData.username}`}</div>
+            <div className={styles["sender-name"]}>
+              {senderUserData.name != undefined ? senderUserData.name : ""}
+            </div>
+            <div className={styles["sender-username"]}>
+              {senderUserData.username != undefined
+                ? `@${senderUserData.username}`
+                : ""}
+            </div>
           </div>
         </div>
         <div className={styles["sender-details-right"]}>
-          <div className={styles["status-msg"]}>{senderUserData.status}</div>
+          <div className={styles["status-msg"]}>
+            {senderUserData.status != undefined ? senderUserData.status : ""}
+          </div>
         </div>
       </div>
       <ul className={styles["messages-container"]}>
