@@ -3,8 +3,7 @@ import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import Profile from "./pages/Profile.jsx";
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -20,33 +19,31 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            isLoggedIn ? (
-              <Home setIsLoggedIn={setIsLoggedIn} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-        <Route path="/login" element={<Login onLogIn={logIn} />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route
-          path="/profile"
-          element={
-            isLoggedIn ? (
-              <Profile setIsLoggedIn={setIsLoggedIn} />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-        <Route path="/chat/:username" element={<Home />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          isLoggedIn ? (
+            <Home setIsLoggedIn={setIsLoggedIn} />
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route path="/login" element={<Login onLogIn={logIn} />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route
+        path="/profile"
+        element={
+          isLoggedIn ? (
+            <Profile setIsLoggedIn={setIsLoggedIn} />
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
+      <Route path="/chat/:username" element={<Home />} />
+    </Routes>
   );
 }
 
