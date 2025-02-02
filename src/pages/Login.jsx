@@ -14,7 +14,7 @@ export default function Login({ onLogIn }) {
     message: undefined,
     type: undefined,
   });
-  const apiUrl = import.meta.env.VITE_APP_API_URL;
+  const apiUrl = "http://api.murmur.chat/";
   const navigate = useNavigate();
 
   async function handleLogin(e) {

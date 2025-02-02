@@ -17,7 +17,7 @@ export default function Chat({ username }) {
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
-  const apiUrl = import.meta.env.VITE_APP_API_URL;
+  const apiUrl = "http://api.murmur.chat/";
   const url = `${apiUrl}api/messages/chat/${username}`;
 
   useEffect(() => {

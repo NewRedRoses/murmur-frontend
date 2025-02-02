@@ -5,7 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Notification from "../components/Notification";
 
 export default function Signup() {
-  const apiUrl = import.meta.env.VITE_APP_API_URL;
+  const apiUrl = "http://api.murmur.chat/";
   const url = `${apiUrl}api/auth/signup`;
 
   const [form, setForm] = useState({

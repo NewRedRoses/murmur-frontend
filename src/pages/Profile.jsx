@@ -18,7 +18,7 @@ export default function Profile() {
 
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
-  const apiUrl = import.meta.env.VITE_APP_API_URL;
+  const apiUrl = "http://api.murmur.chat/";
   const url = `${apiUrl}api/auth/profile`;
 
   useEffect(() => {
