@@ -12,7 +12,7 @@ export default function Navbar() {
 
   function handleLogout() {
     localStorage.removeItem("token");
-    navigate(0);
+    navigate("/login");
   }
   return (
     <div className={styles.navbar}>
