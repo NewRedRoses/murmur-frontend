@@ -5,6 +5,7 @@ import { Search, MessageSquarePlus } from "lucide-react";
 import Modal from "../components/Modal.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Notification from "./Notification.jsx";
 
 export default function ConversationSidebar({ conversations }) {
   const [modalShow, setModalShow] = useState(false);
@@ -12,6 +13,10 @@ export default function ConversationSidebar({ conversations }) {
   const [isUsernameFound, setIsUsernameFound] = useState(false);
   const [filteringTerm, setFilteringTerm] = useState("");
   const [filteredConversations, setFilteredConversations] = useState([]);
+  const [notification, setNotification] = useState({
+    message: undefined,
+    type: undefined,
+  });
 
   const token = localStorage.getItem("token");
   const apiUrl = import.meta.env.VITE_APP_API_URL;
@@ -19,9 +24,6 @@ export default function ConversationSidebar({ conversations }) {
 
   const navigate = useNavigate();
 
-  function handleModal() {
-    setModalShow(!modalShow);
-  }
   function handleUsernameSearch() {
     axios
       .get(url, { headers: { Authorization: `Bearer ${token}` } })
@@ -38,8 +40,7 @@ export default function ConversationSidebar({ conversations }) {
       })
       .catch((err) => {
         if (err.status == 404) {
-          // TODO: display UI  error indicating user not found
-          console.log("username not found");
+          setNotification({ type: "error", message: "Username not found" });
         } else {
           console.log(err);
         }
@@ -76,18 +77,27 @@ export default function ConversationSidebar({ conversations }) {
         <span>Conversations ({conversations.length})</span>
         <button
           className={styles["new-conversation-btn"]}
-          onClick={handleModal}
+          onClick={() => setModalShow(!modalShow)}
         >
           <MessageSquarePlus size={30} />
         </button>
       </h1>
 
-      <Modal
-        isOpen={modalShow}
-        handleFunc={handleUsernameSearch}
-        state={usernameToSearch}
-        setState={setUsernameToSearch}
-      />
+      {modalShow && (
+        <div className="modal-container">
+          <Notification
+            type={notification.type}
+            message={notification.message}
+          />
+          <Modal
+            isOpen={modalShow}
+            handleFunc={handleUsernameSearch}
+            state={usernameToSearch}
+            setState={setUsernameToSearch}
+          />
+        </div>
+      )}
+
       <div className={styles["searchbar-container"]}>
         <Search className={styles["search-icon"]} size="25" color="#34495e" />
         <input
