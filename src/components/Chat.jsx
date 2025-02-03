@@ -65,7 +65,7 @@ export default function Chat({ username }) {
         .then((response) => {
           if (response.status == 200) {
             setMessageToSend("");
-            navigate(`/chat/${username}`);
+            navigate(0);
           }
         })
         .catch((err) => {
