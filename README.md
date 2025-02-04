@@ -1,8 +1,13 @@
-# React + Vite
+# Murmur.Chat - Front-end
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repo is for the front-end for my full-stack messaging app using React & Vite.
 
-Currently, two official plugins are available:
+The user interface was designed using Figma and the icons are by Lucide.dev
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Deployment
+
+The front-end is currently deployed on Vercel. You can check it out: [here](https://murmur.chat)
+
+## Back-end
+
+To learn more about murmur.chat's backend, please check out [the repo for it here](https://github.com/NewRedRoses/murmur-backend).
