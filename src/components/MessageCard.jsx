@@ -13,7 +13,7 @@ export default function MessageCard({ id, name, username }) {
         >
           {name} (@{username})
         </div>
-        <div className={styles["msg-card-preview-text"]}>lorem ipsumm </div>
+        <div className={styles["msg-card-preview-text"]}></div>
       </div>
     </li>
   );
